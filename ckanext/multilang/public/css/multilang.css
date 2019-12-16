@@ -1,4 +1,7 @@
+/*label[for$="-remove-extra-tag"]{*/
+/*	display: none !important;*/
+/*}*/
 
-label[for$="-remove-extra-tag"]{
-	visibility: hidden;
+label.tag-remove-button {
+	display: none !important;
 }

@@ -9,6 +9,7 @@ import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.lib.plugins import DefaultTranslation
 
 import ckanext.multilang.helpers as helpers
 import ckanext.multilang.actions as actions
@@ -18,21 +19,23 @@ log = logging.getLogger(__name__)
 
 _ = toolkit._
 
-class MultilangPlugin(plugins.SingletonPlugin):
+
+class MultilangPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.ITemplateHelpers)
-    plugins.implements(plugins.IRoutes, inherit=True)
+    # plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IPackageController, inherit=True)
     plugins.implements(plugins.IGroupController, inherit=True)
     plugins.implements(plugins.IOrganizationController, inherit=True)
     plugins.implements(plugins.IResourceController, inherit=True)
     plugins.implements(plugins.IActions, inherit=True)
+    plugins.implements(plugins.ITranslation)
 
     # IConfigurer
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'multilang')
+        toolkit.add_resource('public/css', 'multilang')
 
     # see the ITemplateHelpers plugin interface.
     def get_helpers(self):

@@ -14,7 +14,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # http://packaging.python.org/en/latest/tutorial.html#version
-    version='0.0.1',
+    version='0.1.0',
 
     description='''A CKAN extension that manages multilingual contents''',
     long_description=long_description,
@@ -82,8 +82,22 @@ setup(
         multilang=ckanext.multilang.plugin:MultilangPlugin
         multilang_harvester=ckanext.multilang.harvesters.multilang:MultilangHarvester
         multilang_resources=ckanext.multilang.plugin:MultilangResourcesPlugin
+        
+        [babel.extractors]
+        ckan = ckan.lib.extract:extract_ckan
 
         [paste.paster_command]
         multilangdb=ckanext.multilang.commands.multilang:Multilang
-    '''
+    ''',
+    # If you are changing from the default layout of your extension, you may
+    # have to change the message extractors, you can read more about babel
+    # message extraction at
+    # http://babel.pocoo.org/docs/messages/#extraction-method-mapping-and-configuration
+    message_extractors={
+        'ckanext': [
+            ('**.py', 'python', None),
+            ('**.js', 'javascript', None),
+            ('**/templates/**.html', 'ckan', None),
+        ],
+    }
 )
