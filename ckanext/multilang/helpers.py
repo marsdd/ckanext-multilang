@@ -1,13 +1,5 @@
 import logging
-import operator
-
-import ckan
-import ckan.model as model
-import ckan.plugins as p
-import ckan.lib.search as search
-import ckan.lib.helpers as h
-
-import ckan.logic as logic
+import six
 
 from ckan.lib.i18n import get_lang
 from ckanext.multilang.model import PackageMultilang, GroupMultilang, TagMultilang, ResourceMultilang
@@ -19,9 +11,9 @@ def getLanguage():
     
     if lang is not None:
         if isinstance(lang, list):
-            lang = unicode(lang[0])
+            lang = six.u(lang[0])
         else:
-            lang = unicode(lang)
+            lang = six.u(lang)
     return lang
 
 def get_localized_pkg(pkg_dict):

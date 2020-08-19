@@ -1,10 +1,7 @@
 import logging
 from babel.core import Locale
-from pylons.i18n import get_lang
-from routes.mapper import SubMapper, Mapper as _Mapper
 
 from ckan.lib import helpers as h
-from ckan.lib.base import config
 import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.model as model
 import ckan.plugins as plugins

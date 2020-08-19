@@ -55,7 +55,7 @@ def setup():
     if not package_multilang_table.exists():
         try:
             package_multilang_table.create()
-        except Exception,e:
+        except Exception as e:
             # Make sure the table does not remain incorrectly created
             if package_multilang_table.exists():
                 Session.execute('DROP TABLE package_multilang')
@@ -71,7 +71,7 @@ def setup():
     if not group_multilang_table.exists():
         try:
             group_multilang_table.create()
-        except Exception,e:
+        except Exception as e:
             # Make sure the table does not remain incorrectly created
             if group_multilang_table.exists():
                 Session.execute('DROP TABLE group_multilang')
@@ -87,7 +87,7 @@ def setup():
     if not resource_multilang_table.exists():
         try:
             resource_multilang_table.create()
-        except Exception,e:
+        except Exception as e:
             # Make sure the table does not remain incorrectly created
             if resource_multilang_table.exists():
                 Session.execute('DROP TABLE resource_multilang')
@@ -103,7 +103,7 @@ def setup():
     if not tag_multilang_table.exists():
         try:
             tag_multilang_table.create()
-        except Exception,e:
+        except Exception as e:
             # Make sure the table does not remain incorrectly created
             if tag_multilang_table.exists():
                 Session.execute('DROP TABLE tag_multilang')
@@ -151,7 +151,7 @@ class PackageMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds.
             session.rollback()
@@ -205,7 +205,7 @@ class GroupMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
@@ -258,7 +258,7 @@ class ResourceMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
@@ -272,7 +272,7 @@ class ResourceMultilang(DomainObject):
         try:
             session.add_all(resources_list)
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds.
             session.rollback()
@@ -326,7 +326,7 @@ class TagMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
