@@ -14,7 +14,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # http://packaging.python.org/en/latest/tutorial.html#version
-    version='0.1.0',
+    version='0.2.0',
 
     description='''A CKAN extension that manages multilingual contents''',
     long_description=long_description,
@@ -85,9 +85,6 @@ setup(
         
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
-
-        [paste.paster_command]
-        multilangdb=ckanext.multilang.commands.multilang:Multilang
     ''',
     # If you are changing from the default layout of your extension, you may
     # have to change the message extractors, you can read more about babel

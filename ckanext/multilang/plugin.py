@@ -7,6 +7,7 @@ import ckan.model as model
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.lib.plugins import DefaultTranslation
+from .cli import multilang
 
 import ckanext.multilang.helpers as helpers
 import ckanext.multilang.actions as actions
@@ -27,6 +28,7 @@ class MultilangPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IResourceController, inherit=True)
     plugins.implements(plugins.IActions, inherit=True)
     plugins.implements(plugins.ITranslation)
+    plugins.implements(plugins.IClick)
 
     # IConfigurer
     def update_config(self, config_):
@@ -285,6 +287,13 @@ class MultilangPlugin(plugins.SingletonPlugin, DefaultTranslation):
             if r:
                 log.info('Localised fields are missing in resource_multilang table, persisting ...')
                 ResourceMultilang.persist(resource, lang)
+
+    def get_commands(self):
+        """
+        Returns plugin commands
+        :return: list
+        """
+        return [multilang.multilang]
 
 
 class MultilangResourcesPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
