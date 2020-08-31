@@ -11,12 +11,6 @@ def multilang():
 
 
 @multilang.command()
-def initdb():
-    from ckanext.multilang.model import setup as db_setup
-    db_setup()
-
-
-@multilang.command()
 def initsearch():
     conn = make_connection()
     path = "schema"

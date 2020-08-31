@@ -15,7 +15,7 @@ from ckan import model
 
 log = logging.getLogger(__name__)
 
-__all__ = ['PackageMultilang', 'package_multilang_table', 'GroupMultilang', 'ResourceMultilang', 'group_multilang_table', 'TagMultilang', 'tag_multilang_table', 'setup']
+__all__ = ['PackageMultilang', 'package_multilang_table', 'GroupMultilang', 'ResourceMultilang', 'group_multilang_table', 'TagMultilang', 'tag_multilang_table']
 
 package_multilang_table = Table('package_multilang', meta.metadata,
     Column('id', types.Integer, primary_key=True),
