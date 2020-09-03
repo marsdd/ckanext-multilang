@@ -6,8 +6,12 @@ from ckanext.multilang.model import PackageMultilang, GroupMultilang, TagMultila
 
 log = logging.getLogger(__file__)
 
+
 def getLanguage():
-    lang = get_lang()
+    try:
+        lang = get_lang()
+    except RuntimeError:
+        lang = None
     
     if lang is not None:
         if isinstance(lang, list):
