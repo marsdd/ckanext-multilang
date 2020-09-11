@@ -8,17 +8,19 @@ log = logging.getLogger(__file__)
 
 
 def getLanguage():
+    pre_encode_lang = get_lang()
     try:
-        lang = get_lang()
+        if isinstance(pre_encode_lang, list):
+            pre_encode_lang = pre_encode_lang[0]
+
+        lang = six.u(pre_encode_lang)
     except RuntimeError:
         lang = None
-    
-    if lang is not None:
-        if isinstance(lang, list):
-            lang = six.u(lang[0])
-        else:
-            lang = six.u(lang)
+    except TypeError:
+        lang = pre_encode_lang
+
     return lang
+
 
 def get_localized_pkg(pkg_dict):
     if pkg_dict != '' and 'type' in pkg_dict:
