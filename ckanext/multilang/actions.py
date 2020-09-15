@@ -5,7 +5,6 @@ import sqlalchemy
 import ckan.plugins.toolkit as toolkit
 
 from paste.deploy.converters import asbool
-from pylons.i18n import get_lang
 from ckanext.multilang.model import GroupMultilang
 
 import ckan.lib as lib

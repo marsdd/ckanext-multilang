@@ -1,2 +1,3 @@
 include README.md
 recursive-include ckanext/multilang *.html *.json *.js *.less *.css *.yml *.mo
+recursive-include include ckanext/multilang/migration/multilang *.ini

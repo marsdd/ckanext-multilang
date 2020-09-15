@@ -15,7 +15,7 @@ from ckan import model
 
 log = logging.getLogger(__name__)
 
-__all__ = ['PackageMultilang', 'package_multilang_table', 'GroupMultilang', 'ResourceMultilang', 'group_multilang_table', 'TagMultilang', 'tag_multilang_table', 'setup']
+__all__ = ['PackageMultilang', 'package_multilang_table', 'GroupMultilang', 'ResourceMultilang', 'group_multilang_table', 'TagMultilang', 'tag_multilang_table']
 
 package_multilang_table = Table('package_multilang', meta.metadata,
     Column('id', types.Integer, primary_key=True),
@@ -46,74 +46,6 @@ tag_multilang_table = Table('tag_multilang', meta.metadata,
     Column('tag_name', types.UnicodeText, nullable=False, index=True),
     Column('lang', types.UnicodeText, nullable=False, index=True),
     Column('text', types.UnicodeText, nullable=False, index=True))
-
-
-def setup():
-    log.debug('Multilingual tables defined in memory')
-
-    # Setting up package multilang table
-    if not package_multilang_table.exists():
-        try:
-            package_multilang_table.create()
-        except Exception,e:
-            # Make sure the table does not remain incorrectly created
-            if package_multilang_table.exists():
-                Session.execute('DROP TABLE package_multilang')
-                Session.commit()
-
-            raise e
-
-        log.info('Package Multilingual table created')
-    else:
-        log.info('Package Multilingual table already exist')
-    
-    # Setting up group multilang table
-    if not group_multilang_table.exists():
-        try:
-            group_multilang_table.create()
-        except Exception,e:
-            # Make sure the table does not remain incorrectly created
-            if group_multilang_table.exists():
-                Session.execute('DROP TABLE group_multilang')
-                Session.commit()
-
-            raise e
-
-        log.info('Group Multilingual table created')
-    else:
-        log.info('Group Multilingual table already exist')
-
-    # Setting up resource multilang table
-    if not resource_multilang_table.exists():
-        try:
-            resource_multilang_table.create()
-        except Exception,e:
-            # Make sure the table does not remain incorrectly created
-            if resource_multilang_table.exists():
-                Session.execute('DROP TABLE resource_multilang')
-                Session.commit()
-
-            raise e
-
-        log.info('Resource Multilingual table created')
-    else:
-        log.info('Resource Multilingual table already exist')
-
-    # Setting up tag multilang table
-    if not tag_multilang_table.exists():
-        try:
-            tag_multilang_table.create()
-        except Exception,e:
-            # Make sure the table does not remain incorrectly created
-            if tag_multilang_table.exists():
-                Session.execute('DROP TABLE tag_multilang')
-                Session.commit()
-
-            raise e
-
-        log.info('Tag Multilingual table created')
-    else:
-        log.info('Tag Multilingual table already exist')
 
 
 class PackageMultilang(DomainObject):
@@ -151,7 +83,7 @@ class PackageMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds.
             session.rollback()
@@ -205,7 +137,7 @@ class GroupMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
@@ -258,7 +190,7 @@ class ResourceMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
@@ -272,7 +204,7 @@ class ResourceMultilang(DomainObject):
         try:
             session.add_all(resources_list)
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds.
             session.rollback()
@@ -326,7 +258,7 @@ class TagMultilang(DomainObject):
             ])
 
             session.commit()
-        except Exception, e:
+        except Exception as e:
             # on rollback, the same closure of state
             # as that of commit proceeds. 
             session.rollback()
