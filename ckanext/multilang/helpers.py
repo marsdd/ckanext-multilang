@@ -8,8 +8,9 @@ log = logging.getLogger(__file__)
 
 
 def getLanguage():
-    pre_encode_lang = get_lang()
+    pre_encode_lang = None
     try:
+        pre_encode_lang = get_lang()
         if isinstance(pre_encode_lang, list):
             pre_encode_lang = pre_encode_lang[0]
 
